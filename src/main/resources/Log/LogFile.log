@@ -1,0 +1,9 @@
+INFO (root:?)- **********  Create AutoConfigFile.cfg *************
+INFO (root:43)- Start to create Config file for automation code
+INFO (root:51)- Write Base info part 1 
+INFO (root:54)- Write [Input settings] info
+INFO (root:58)- Write [Environments] info
+INFO (root:80)- Write Base info part 2
+INFO (root:96)- Config file completed.
+INFO (root:?)- Write the esecusiob time in the properties file!
+INFO (root:?)- Deply the environment cost time:0day, 0 hour, 12 minutes, 35seconds
