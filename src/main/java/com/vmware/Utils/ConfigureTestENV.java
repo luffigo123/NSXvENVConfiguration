@@ -65,7 +65,7 @@ public class ConfigureTestENV {
 
 			log.info("Create clusters, names are - cluster1: " + testData.Cluster1);
 			cluOps.createDefaultCluster(testData.DatacenterName, testData.Cluster1);
-//			cluOps.createDefaultCluster(testData.DatacenterName, testData.Cluster2);
+			cluOps.createDefaultCluster(testData.DatacenterName, testData.Cluster2);
 
 			log.info("Move the ESXi_01 to cluster1");
 			cluOps.moveHostToCluster(testData.Cluster1, esx1_IP);
