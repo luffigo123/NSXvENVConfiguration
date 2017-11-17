@@ -18,6 +18,8 @@ public class DefaultEnvironment {
 	public static final String vsmUserName = cfg.ConfigMap.get("vsmUserName"); 
 	public static final String vsmPasswd = cfg.ConfigMap.get("vsmPasswd");
 	
+	public static final String nsxVersion = cfg.ConfigMap.get("nsxVersion");
+	
 	//helper esxi
 	public static final String hostForCloneVM = cfg.ConfigMap.get("hostForCloneVM");
 	public static final String helperESXiUsername = cfg.ConfigMap.get("helperESXiUsername");

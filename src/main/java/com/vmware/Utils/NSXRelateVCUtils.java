@@ -38,9 +38,31 @@ public class NSXRelateVCUtils {
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
-	public String getVCThumbprint(String regVCIP, String vcRootName, String vcRootPasswd) throws InterruptedException, ExecutionException, TimeoutException{
+//	public String getVCThumbprint(String regVCIP, String vcRootName, String vcRootPasswd) throws InterruptedException, ExecutionException, TimeoutException{
+//	
+//		String cmd = "openssl x509 -in /etc/vmware-vpx/ssl/rui.crt -fingerprint -sha1 -noout";
+//		Callable<String> AsyncsshConn = new GetInfoViaSSHConnection(cmd, regVCIP, vcRootName,vcRootPasswd);
+//		ExecutorService pool = Executors.newFixedThreadPool(1);
+//		Future<String> f = pool.submit(AsyncsshConn);
+//		String thumbPrint  = f.get(3, TimeUnit.MINUTES);
+//
+//		thumbPrint = thumbPrint.substring(thumbPrint.lastIndexOf("=") + 1,
+//				thumbPrint.lastIndexOf("=") + 60);
+//		log.info("Thumbprint Value: " + thumbPrint);
+//		
+//		return thumbPrint;
+//	}
 	
-		String cmd = "openssl x509 -in /etc/vmware-vpx/ssl/rui.crt -fingerprint -sha1 -noout";
+	public String getVCThumbprint(String regVCIP, String vcRootName, String vcRootPasswd, String nsxVersion) throws InterruptedException, ExecutionException, TimeoutException{
+		
+		int nsxR = Integer.valueOf(nsxVersion);
+		String cmd = "";
+		if(nsxR >= 640) {
+			cmd = "openssl x509 -in /etc/vmware-vpx/ssl/rui.crt -fingerprint -sha256 -noout";
+		}else {
+			cmd = "openssl x509 -in /etc/vmware-vpx/ssl/rui.crt -fingerprint -sha1 -noout";
+		}
+
 		Callable<String> AsyncsshConn = new GetInfoViaSSHConnection(cmd, regVCIP, vcRootName,vcRootPasswd);
 		ExecutorService pool = Executors.newFixedThreadPool(1);
 		Future<String> f = pool.submit(AsyncsshConn);
@@ -52,7 +74,6 @@ public class NSXRelateVCUtils {
 		
 		return thumbPrint;
 	}
-	
     
 	/**
 	 * 

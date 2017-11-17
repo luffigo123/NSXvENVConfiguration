@@ -2,8 +2,10 @@ package com.vmware.Utils;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
+
 import com.vmware.Utils.DefaultEnvironment;
 import com.vmware.Utils.PropertiesUtils;
+import com.vmware.model.VCinfo;
 
 
 public class RegisterNSXtoVC {
@@ -15,6 +17,7 @@ public class RegisterNSXtoVC {
 	private String vcUserName;
 	private String vcPassword;
 
+	private String nsxVersion;
 	private NSXRelateVCUtils nsxRelateVCUtils;
 	
 	
@@ -33,21 +36,45 @@ public class RegisterNSXtoVC {
 		vcUserName = DefaultEnvironment.vcUserName;
 		this.vcPassword = DefaultEnvironment.vcPasswd;
 		
+		nsxVersion = DefaultEnvironment.nsxVersion;
+		
 		nsxRelateVCUtils = new NSXRelateVCUtils();
 	}
-
+//
+//	public boolean registerNSXtoVC(){
+//		boolean result = false;
+//		String vcFingerprint = "";
+//		try {
+//			vcFingerprint = nsxRelateVCUtils.getVCThumbprint(vc_IP, vcRootName, vcRootPassword);
+//		} catch (InterruptedException | ExecutionException | TimeoutException e1) {
+//			e1.printStackTrace();
+//		}
+//		try {
+//			VSMManagement vmsMrg = new VSMManagement();
+//
+//			result = vmsMrg.registerNSXtoVC(vc_IP, this.vcUserName, this.vcPassword, vsm_IP, vcFingerprint);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+	
 	public boolean registerNSXtoVC(){
 		boolean result = false;
 		String vcFingerprint = "";
 		try {
-			vcFingerprint = nsxRelateVCUtils.getVCThumbprint(vc_IP, vcRootName, vcRootPassword);
+			vcFingerprint = nsxRelateVCUtils.getVCThumbprint(vc_IP, vcRootName, vcRootPassword, this.nsxVersion);
 		} catch (InterruptedException | ExecutionException | TimeoutException e1) {
 			e1.printStackTrace();
 		}
 		try {
 			VSMManagement vmsMrg = new VSMManagement();
 
-			result = vmsMrg.registerNSXtoVC(vc_IP, this.vcUserName, this.vcPassword, vsm_IP, vcFingerprint);
+//			result = vmsMrg.registerNSXtoVC(vc_IP, EnvConst.vcUser, EnvConst.vcPwd, vsm_IP, vcFingerprint);
+			
+			VCinfo vcInfo = new VCinfo(vc_IP, this.vcUserName, this.vcPassword, vcFingerprint, "true","","");
+			vmsMrg.registerNSXtoVC(vcInfo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
