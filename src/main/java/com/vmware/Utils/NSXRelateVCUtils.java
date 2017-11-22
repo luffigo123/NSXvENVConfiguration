@@ -68,8 +68,7 @@ public class NSXRelateVCUtils {
 		Future<String> f = pool.submit(AsyncsshConn);
 		String thumbPrint  = f.get(3, TimeUnit.MINUTES);
 
-		thumbPrint = thumbPrint.substring(thumbPrint.lastIndexOf("=") + 1,
-				thumbPrint.lastIndexOf("=") + 60);
+		thumbPrint = thumbPrint.substring(thumbPrint.lastIndexOf("=") + 1);
 		log.info("Thumbprint Value: " + thumbPrint);
 		
 		return thumbPrint;
